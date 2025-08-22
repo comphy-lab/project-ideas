@@ -1,0 +1,139 @@
+\documentclass[11pt]{article}    
+\usepackage[a4paper,left=1in,right=1in,top=1in,bottom=1in]{geometry} 
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage{seqsplit}
+
+\renewcommand{\familydefault}{\sfdefault} 
+\usepackage{setspace}  \singlespacing  
+\usepackage{graphicx}        
+\usepackage[absolute]{textpos}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{multirow}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue}
+}
+
+% Additional packages for the content
+\usepackage{float}
+\usepackage{subfig,wrapfig}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{fancyhdr,fancybox,color}
+\usepackage{enumerate}
+\usepackage[amssymb]{SIunits}
+\definecolor{MyBlue}{rgb}{0,0.3,0.6}
+\usepackage[all]{hypcap}
+\usepackage{csquotes}
+\usepackage[url=false,
+backend=bibtex,
+style=authoryear-comp,
+doi=true,
+isbn=true,
+backref=false,
+dashed=false,
+maxcitenames=2,
+maxbibnames=99,
+natbib=true]{biblatex}
+\DeclareNameAlias{author}{family-given}
+\renewbibmacro{in:}{}
+\addbibresource{../_logosAndRef/references.bib}
+\nonfrenchspacing
+
+% Configurable separation between header and body
+\newlength{\headertobodysep}
+\setlength{\headertobodysep}{1cm}
+
+% Header with logos and contact information
+\begin{document}
+\thispagestyle{empty}
+
+% Lean header with aligned elements
+\textblockorigin{0pt}{0pt}
+
+% Durham logo on the left
+\begin{textblock*}{5cm}(0.5cm,1cm)
+    \includegraphics[height=2cm]{../_logosAndRef/Durham-University.pdf}
+\end{textblock*}
+
+% Contact information in the center - vertically centered with logos
+\begin{textblock*}{9cm}(6cm,1.5cm)
+    \centering
+    {\large \textbf{Drops and bubbles spreading | CoMPhy Lab}}\\[0.2em]
+    Department of Physics, Durham University\\[0.3em]
+    \href{https://comphy-lab.org}{comphy-lab.org}
+\end{textblock*}
+
+% CoMPhy logo aligned with right margin
+\begin{textblock*}{5cm}(15.5cm,1cm) % exactly 1 cm away from the right edge
+    \includegraphics[height=2cm]{../_logosAndRef/CoMPhy-Lab.png}
+\end{textblock*}
+
+% Reset to normal text flow after header
+\vspace*{\headertobodysep}
+
+\begin{center}
+    \begin{LARGE}
+     Drops and bubbles spreading on lubricant infused surfaces
+    \end{LARGE}
+\end{center}
+
+\section*{Description}
+
+The spreading of liquid drops and air bubbles on solid surfaces is a complex phenomenon with various natural and industrial applications. Recently, a new class of surfaces, called liquid infused surfaces (LIS), has been developed that allows for unprecedented control over the spreading behavior of liquids and gases on solid surfaces. In this proposal, we aim to investigate the spreading behavior of liquid drops and air bubbles on LIS and explore its potential applications in different fields. 
+
+Figure~\ref{Figure::Typical} illustrates a typical scenario when an air bubble in water comes in contact with LIS. Due to change in topology at the point of contact, a train of capillary waves travel across the bubble-water interface (figure~\ref{Figure::Typical}a,b,c). These traveling capillary waves converge at the top of the bubble (figure~\ref{Figure::Typical}d,e) leading to entrainment of a smaller air bubble (figure~\ref{Figure::Typical}f,g). We will study this process in detail to understand the influence of various control parameters on this spreading dynamics. 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.95\textwidth]{BubbleOnLIS.pdf}
+		\caption{A typical scenario of an air bubble in water spreading on liquid infused surfaces (LIS). In each snapshot, left-hand side contains information about the velocity field magnitude normalized with the inertio-capillary velocity and the right-hand side shows viscous dissipation function ($\varepsilon_\eta = 2\eta\left(\boldsymbol{\mathcal{D}:\mathcal{D}}\right)$). The latter is plotted on a $\log$ scale to identify regions of high viscous dissipation. Also see the video of this process at: \href{https://www.youtube.com/watch?v=crRoP9udk9M}{https://www.youtube.com/watch?v=crRoP9udk9M}.}
+		\label{Figure::Typical}
+\end{center}
+\end{figure}
+
+\noindent The main objectives of this study are:
+
+\begin{enumerate}
+	\item To investigate the spreading behavior of liquid drops and air bubbles on LIS under different conditions, such as liquid and geometric properties (see figure~\ref{Figure::Typical}). 
+	\item To understand the underlying mechanisms that govern the spreading behavior of liquid drops and air bubbles on LIS. 
+	\item To identify and explore the different timescales relevant for this process (see the introduction of \citet{VatsalThesis}).
+\end{enumerate}
+
+\section*{What will you do and what will you learn?}
+In the Physics of Fluids group, we are looking for enthusiastic students to work on this topic.
+\begin{enumerate}
+\itemsep0em
+\item You will learn about fundamental fluid dynamics.
+\item You will get hands-on experience with Computational Fluid Dynamics (CFD).
+\item You will learn how to do basic and advanced data analysis.
+\item You will learn modeling of complex multiphase systems contact lines. 
+\item You will learn how to document and publish ready-to-use codes and share them with the community, similar to \citet{basiliskVatsal, basiliskVatsalDropFilm, basiliskVatsalViscousBouncing}. 
+\item As a part of the \href{https://comphy-lab.org}{CoMPhy lab} at the Physics of Fluids Dept., you will learn and adapt open-source coding principles. 
+\item You will learn how to collaborate with a diverse group of researchers, specifically with other numericists, experimentalists and theoreticians.
+\end{enumerate}
+
+If you have any questions, feel free to contact us \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org}/\href{mailto:vatsal.sanjay@durham.ac.uk}{vatsal.sanjay@durham.ac.uk} or drop by Ph255 at the Department of Physics at Durham University.
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline \textbf{Collaborators} & \textbf{E-mail} & \textbf{Based at} \\
+\hline Dr. Vatsal Sanjay & \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org} & Ph255 (Rochester building) \\
+\hline Aman Bhargava & \href{mailto:a.s.bhargava@utwente.nl}{a.s.bhargava@utwente.nl} & Univ. Twente \\
+\hline Dr. Alexandros Oratis   & \href{mailto:a.t.oratis@utwente.nl}{a.t.oratis@utwente.nl}& TU Delft \\
+\hline Prof. Dr. Detlef Lohse & \href{mailto:d.lohse@utwente.nl}{d.lohse@utwente.nl} & Univ. Twente  \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+\noindent\textit{Last updated: \today}
+
+\printbibliography
+
+\end{document}

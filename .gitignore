@@ -7,7 +7,7 @@ Impact of gigantic drops
 Z_PlanningInFuture
 **/*.docx
 **/.DS_Store
-
+**/.cursor
 
 ## Core latex/pdflatex auxiliary files:
 **/*.aux

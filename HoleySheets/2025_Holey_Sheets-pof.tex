@@ -12,6 +12,7 @@
 \definecolor{MyBlue}{rgb}{0,0.3,0.6}      	
 \usepackage[colorlinks=true,linkcolor=MyBlue,plainpages=false,citecolor=MyBlue,urlcolor=MyBlue]{hyperref}
 \usepackage[all]{hypcap}   					%fixes the hyperref, such that links are anchored at the bottom of the images, not the top
+\usepackage{tcolorbox}
 \usepackage[url=false,
 backend=bibtex,
 style=authoryear-comp,
@@ -26,6 +27,8 @@ natbib=true]{biblatex}
 \renewbibmacro{in:}{}
 \addbibresource{../_logosAndRef/references.bib}
 
+\definecolor{mgray}{gray}{0.85}
+\definecolor{mpurple}{HTML}{68236D}
 \nonfrenchspacing
 
 \begin{document} 

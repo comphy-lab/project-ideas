@@ -9,6 +9,12 @@
 \usepackage{multirow}
 \usepackage[amssymb]{SIunits}
 \definecolor{MyBlue}{rgb}{0,0.3,0.6}
+
+\usepackage{tcolorbox}
+\definecolor{mgray}{gray}{0.85}
+\definecolor{mpurple}{HTML}{68236D}
+
+
 \usepackage[colorlinks=true,
             linkcolor=MyBlue,
             plainpages=false,
@@ -33,33 +39,47 @@ natbib=true]{biblatex}
 
 \begin{document}
 \noindent Chair: Physics of Fluids Department
+
 \begin{center}
- \begin{LARGE}
-  Drops and bubbles spreading on lubricant infused surfaces
- \end{LARGE}
+	\begin{LARGE}
+	 Drops and bubbles spreading on lubricant infused surfaces
+	\end{LARGE}
 \end{center}
+
+\noindent Watch a water drop dance on a non-stick pan, or an air bubble slide along a submerged leaf -- these everyday phenomena hide rich physics at the intersection of surface tension, viscosity, and topology.
+
+\begin{tcolorbox}[colback=mgray,colframe=mpurple,title=TL;DR]
+	Liquid-infused surfaces (LIS) enable unprecedented control over fluid spreading, crucial for self-cleaning materials and microfluidics. This project investigates how drops and bubbles spread on lubricant-laden substrates through high-resolution numerical simulations. Using Basilisk's adaptive VOF solver, you'll capture the cascade of capillary waves triggered when fluids contact LIS, map spreading regimes and reveal how wave convergence entrains secondary droplets. Working with experimentalists at TU Delft and Univ. Twente, you'll develop scaling laws bridging microscopic contact lines to macroscopic spreading, advancing both fundamental understanding and applications in anti-fouling coatings and heat transfer.
+\end{tcolorbox}
 
 \section*{Description}
 
-The spreading of liquid drops and air bubbles on solid surfaces is a complex phenomenon with various natural and industrial applications. Recently, a new class of surfaces, called liquid infused surfaces (LIS), has been developed that allows for unprecedented control over the spreading behavior of liquids and gases on solid surfaces. In this proposal, we aim to investigate the spreading behavior of liquid drops and air bubbles on LIS and explore its potential applications in different fields. 
+Liquid-infused surfaces (LIS) represent a breakthrough in controlling how fluids spread on solids, with applications from self-cleaning materials to drag reduction. 
+When drops or bubbles contact these lubricant-laden substrates, the topology change at the three-phase contact line triggers cascading capillary waves that reshape the interface (fig.~\ref{Figure::Typical}). This project investigates the fundamental spreading dynamics of liquid drops and air bubbles on LIS through direct numerical simulation. You will use volume-of-fluid methods to resolve the multi-scale physics -- from microscopic contact lines to macroscopic wave propagation -- and map how viscosity ratios, surface tensions, and geometric parameters control spreading behaviour. The work will reveal how capillary waves converge to entrain secondary droplets/bubbles, identify the competing timescales (viscous, inertial, capillary) governing the dynamics, and establish scaling laws for spreading rates. These insights will guide the design of LIS for applications in microfluidics, heat transfer, and anti-fouling coatings.
 
-Figure~\ref{Figure::Typical} illustrates a typical scenario when an air bubble in water comes in contact with LIS. Due to change in topology at the point of contact, a train of capillary waves travel across the bubble-water interface (figure~\ref{Figure::Typical}a,b,c). These traveling capillary waves converge at the top of the bubble (figure~\ref{Figure::Typical}d,e) leading to entrainment of a smaller air bubble (figure~\ref{Figure::Typical}f,g). We will study this process in detail to understand the influence of various control parameters on this spreading dynamics. 
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.95\textwidth]{BubbleOnLIS.pdf}
-		\caption{A typical scenario of an air bubble in water spreading on liquid infused surfaces (LIS). In each snapshot, left-hand side contains information about the velocity field magnitude normalized with the inertio-capillary velocity and the right-hand side shows viscous dissipation function ($\varepsilon_\eta = 2\eta\left(\boldsymbol{\mathcal{D}:\mathcal{D}}\right)$). The latter is plotted on a $\log$ scale to identify regions of high viscous dissipation. Also see the video of this process at: \href{https://www.youtube.com/watch?v=crRoP9udk9M}{https://www.youtube.com/watch?v=crRoP9udk9M}.}
-		\label{Figure::Typical}
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.95\textwidth]{BubbleOnLIS.pdf}
+	\caption{A typical scenario of an air bubble in water spreading on liquid infused surfaces (LIS). In each snapshot, left-hand side contains information about the velocity field magnitude normalized with the inertio-capillary velocity and the right-hand side shows viscous dissipation function ($\varepsilon_\eta = 2\eta\left(\boldsymbol{\mathcal{D}:\mathcal{D}}\right)$). The latter is plotted on a $\log$ scale to identify regions of high viscous dissipation. Also see the video of this process at: \href{https://www.youtube.com/watch?v=crRoP9udk9M}{https://www.youtube.com/watch?v=crRoP9udk9M}.}
+	\label{Figure::Typical}
 \end{center}
 \end{figure}
 
-\noindent The main objectives of this study are:
+\section*{Deep dive}
+
+The main objectives of this study are:
 
 \begin{enumerate}
-	\item To investigate the spreading behavior of liquid drops and air bubbles on LIS under different conditions, such as liquid and geometric properties (see figure~\ref{Figure::Typical}). 
-	\item To understand the underlying mechanisms that govern the spreading behavior of liquid drops and air bubbles on LIS. 
-	\item To identify and explore the different timescales relevant for this process (see the introduction of \citet{VatsalThesis}).
+\item To investigate the spreading behavior of liquid drops and air bubbles on LIS under different conditions, such as liquid and geometric properties (see figure~\ref{Figure::Typical}). 
+\item To understand the underlying mechanisms that govern the spreading behavior of liquid drops and air bubbles on LIS. 
+\item To identify and explore the different timescales relevant for this process (see the introduction of \citet{VatsalThesis}).
 \end{enumerate}
+
+\noindent \textbf{Problem formulation:} The spreading process involves three immiscible phases (drop/bubble, ambient fluid, lubricant) with distinct densities $\rho_i$ and viscosities $\eta_i$. The dynamics are governed by the incompressible Navier-Stokes equations with surface tension forces $\gamma_{ij}$ at each interface. Key dimensionless groups include the Ohnesorge number $Oh_i = \eta_i/\sqrt{\rho_o\gamma_{ow}R}$ comparing viscous to inertio-capillary effects, density and ratio of interfacial energies. 
+
+\noindent \textbf{Numerical setup:} We will employ the volume-of-fluid (VOF) method with geometric reconstruction in \href{https://github.com/comphy-lab/Bubble-at-Lubis}{Basilisk C} to track the evolving interfaces. The adaptive mesh refinement targets the contact line region and capillary waves, with maximum refinement. Time integration also uses an adaptive scheme.
+
+\noindent \textbf{Validation and uncertainty:} Simulations will be validated against: (i) experimental high-speed imaging data from collaborators at TU Delft/Univ. Twente, (ii) analytical solutions for small-amplitude capillary waves, (iii) grid convergence studies monitoring integrated kinetic energy and enstrophy. The viscous dissipation function $\varepsilon_\eta = 2\eta\left(\boldsymbol{\mathcal{D}:\mathcal{D}}\right)$ will quantify energy loss pathways.
 
 \section*{What will you do and what will you learn?}
 In the Physics of Fluids group, we are looking for enthusiastic students to work on this topic.
@@ -78,11 +98,11 @@ If you have any questions, fell free to contact \href{mailto:a.s.bhargava@utwent
 \begin{center}
 \begin{tabular}{|l|l|l|}
 \hline \textbf{Supervision} & \textbf{E-mail} & \textbf{Office} \\
-\hline Aman Bhargava & \href{mailto:a.s.bhargava@utwente.nl}{a.s.bhargava@utwente.nl} & Meander 249 \\
+\hline Aman Bhargava M.Sc. & \href{mailto:a.s.bhargava@utwente.nl}{a.s.bhargava@utwente.nl} & Meander 249 \\
 \hline \multirow{2}{*}{Dr. Vatsal Sanjay} & \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org} & \multirow{2}{*}{Durham University} \\
 & \href{mailto:vatsal.sanjay@durham.ac.uk}{vatsal.sanjay@durham.ac.uk} & \\
-\hline Dr. Alexandros Oratis   & \href{mailto:a.t.oratis@utwente.nl}{a.t.oratis@utwente.nl}& Meander 250 \\
-\hline Prof. Dr. Detlef Lohse & \href{mailto:d.lohse@utwente.nl}{d.lohse@utwente.nl} & Meander 261  \\
+\hline Dr. Alexandros Oratis   & \href{mailto:a.t.oratis@utwente.nl}{a.t.oratis@utwente.nl}& TU Delft \\
+\hline Prof. Dr. Detlef Lohse F.R.S. & \href{mailto:d.lohse@utwente.nl}{d.lohse@utwente.nl} & Meander 261  \\
 \hline
 \end{tabular}
 \end{center}

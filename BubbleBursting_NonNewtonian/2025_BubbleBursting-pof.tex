@@ -9,6 +9,10 @@
 \usepackage{multirow}
 \usepackage[amssymb]{SIunits}
 \definecolor{MyBlue}{rgb}{0,0.3,0.6}
+
+\usepackage{tcolorbox}
+\definecolor{mgray}{gray}{0.85}
+\definecolor{mpurple}{HTML}{68236D}
 \usepackage[colorlinks=true,
 linkcolor=MyBlue,
 plainpages=false,
@@ -31,48 +35,52 @@ natbib=true]{biblatex}
 \nonfrenchspacing
 \begin{document}
 \noindent Chair: Physics of Fluids Department
+
 \begin{center}
- \begin{LARGE}
-  Physics of fluids with a glass of champagne
- \end{LARGE}
+	\begin{LARGE}
+	From Champagne to Coughs: Modelling Droplet Formation
+	\end{LARGE}
 \end{center}
+
+\noindent Hold your palm over a glass of champagne (fig.~\ref{fig:champange}) and feel the mist of tiny droplets landing on your skin. These droplets, launched by bursting bubbles, carry everything from wine aromatics to -- in other contexts -- airborne pathogens.
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=0.4\textwidth]{champagne.jpg}
+	\caption{\citet{ghabache2016evaporation} reported the collapse of numerous bubbles at the free surface, emitting a cloud of tiny droplets, which is characteristic of champagne and other sparkling wines and enhances the sensual experience of the taster.}
+	\label{fig:champange}
+\end{center}
+\end{figure}
+
+\begin{tcolorbox}[colback=mgray,colframe=mpurple,title=TL;DR]
+	Investigate how bubbles burst in complex fluids that behave like both liquids and elastic solids -- from volcanic mudpots to respiratory mucus. Using computational fluid dynamics simulations with the open-source \href{https://comphy-lab.org/MultiRheoFlow}{Basilisk C} solver, you'll discover how viscosity and elasticity compete to control jet formation and droplet ejection when bubble cavities collapse. Your simulations will map regimes where elastic stresses suppress or enhance jetting. Working with international collaborators at Twente and Delft who provide experimental validation, you'll connect fundamental physics to applications including aerosol formation in sparkling beverages and respiratory droplet generation during coughing. The project combines multiphase flow physics, non-Newtonian fluid mechanics, and high-performance computing to address open questions in interfacial dynamics with direct relevance to disease transmission modelling.
+\end{tcolorbox}
+
 \section*{Description}
-If one notices carefully a glass of champagne (see figure \ref{fig:champange}) or a carbonated beverage, the air bubble in the liquid rises due to buoyancy and reaches the liquid-air interface. The bubble sits at the interface for a while and then bursts, creating a cavity in the interface. Bubble bursting like this is observed in many real-life scenarios. This process is responsible for transporting aromatics from champagne and pathogens from contaminated water. Furthermore, bubbles bursting in oceans emit nuclei that are essential for cloud formation in our atmosphere. 
 
-The newly formed cavity desires to flatten out due to surface tension effects, and capillary waves begin traveling to serve this purpose. However, traveling waves do more than flatten the cavity; they collide at the bottom of the cavity, creating a jet that breaks into vertically projected droplets; see figures \ref{Figure::Typical} \& \ref{Figure::Waves}. This phenomenon has been widely studied by \citet{duchemin2002jet, walls2015jet, deike2018dynamics, gordillo2019capillary}.
+Bubble bursting at liquid surfaces creates spectacular jets that eject droplets into the air, a phenomenon ubiquitous from ocean spray to volcanic mudpots (see \href{https://www.youtube.com/watch?v=a9hUsVq9q7U}{YouTube link}) to respiratory disease transmission \citep{walls2017quantifying,bourouiba2021fluid,sanjay_lohse_jalaal_2021,balasubramanianBurstingBubbleElastoviscoplastic2024,dixit2024viscoelastic}. While the physics in simple Newtonian fluids is well-established \citep{duchemin2002jet, walls2015jet, deike2018dynamics, gordillo2019capillary}, we lack understanding of bubble bursting in complex non-Newtonian fluids -- particularly elastoviscoplastic materials that flow like water yet store elastic energy like rubber bands. 
+This project investigates bubble collapse dynamics, jet formation, and droplet ejection in non-Newtonian fluids using cutting-edge computational fluid dynamics simulations. 
+You'll systematically vary fluid properties to discover how viscosity and elasticity compete to control jet heights and droplet sizes, working in parallel with laboratory experiments for direct validation. Your findings will illuminate fundamental fluid physics while directly informing models of respiratory droplet formation during coughing and sneezing -- crucial for understanding airborne disease transmission.
 
-Nonetheless, we lack a comprehensive understanding of the influence of liquid properties, especially non-Newtonian effects of surrounding liquid on the overall dynamics. Bubble-bursting in non-Newtonian media is observed in several geophysical phenomena such as mudpots (see \citet{sanjay_lohse_jalaal_2021,balasubramanianBurstingBubbleElastoviscoplastic2024} and \href{https://www.youtube.com/watch?v=a9hUsVq9q7U}{YouTube link}). In addition to its practical applications, bubble-bursting in non-Newtonian medium has great scientific relevance. For instance, understanding the bubble-bursting dynamics in a viscoelastic medium teaches us a great deal and paves the way for understanding much more complex flows, such as coughing or sneezing. Such a phenomenon involves the breaking of mucosalivary fluids (which shows viscoelastic behavior) into droplets that are primarily responsible for airborne disease transmission \citep{walls2017quantifying, bourouiba2021fluid}. You will numerically study the dynamics produced by bubble bursting in a viscoelastic medium (see \citet{dixit2024viscoelastic}). The numerical results obtained will be compared with the experimental findings from a parallel project. Finally, the implication of our analysis will be made on the understanding of droplet distribution during coughing or sneezing. 
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.4\textwidth]{champagne.jpg}
-		\caption{\citet{ghabache2016evaporation} reported the collapse of numerous bubbles at the free surface, emitting a cloud of tiny droplets, which is characteristic of champagne and other sparkling wines and enhances the sensual experience of the taster.}
-		\label{fig:champange}
-	\end{center}
-\end{figure}
-
+	
 \begin{figure}[H]
 \begin{center}
- \includegraphics[width=0.95\textwidth]{temporal.png}
- \caption{Time evolution of the dynamics of open bubble cavity at the water surface. The color shows the magnitude of non-dimensionalized vorticity, $\Gamma$ (maximum $\Gamma$ = 150 with red and minimum $\Gamma$ = -150 with blue).}
- \label{Figure::Typical}
+	\includegraphics[width=0.9\textwidth]{schematic.pdf}
+	\caption{Observation of the time evolution of the open bubble cavity. The lower rows display two views: the top view is above the water surface, while the bottom view is below the surface. }
+	\label{Figure::Waves}
 \end{center}
 \end{figure}
 
+\section*{Deep dive}
 
-\begin{figure}[H]
-\begin{center}
- \includegraphics[width=0.95\textwidth]{schematic.pdf}
- \caption{Observation of the time evolution of the open bubble cavity. The lower rows display two views: the top view is above the water surface, while the bottom view is below the surface. }
- \label{Figure::Waves}
-\end{center}
-\end{figure}
+When a bubble bursts at a free surface, it creates an open cavity that collapses under surface tension forces. Capillary waves propagate along the cavity interface, focusing at the cavity bottom to generate an upward jet (Worthington jet) that subsequently breaks into droplets (see figs.~\ref{Figure::Waves}). The governing dynamics involve the interplay between inertia, surface tension, viscosity, and in viscoelastic fluids, elastic stresses and relaxation time of these elastic stresses.
+
 \section*{What you will do and what you will learn?}
 
 \begin{enumerate}
 \item You will learn about the physics of fluids, and science underlying non-Newtonian fluid flows. 
 \item You will learn how to utilize state-of-the-art computational tools to study real life physics. 
-\item You will have access to a read-to-use codebase (available on \href{https://github.com/comphy-lab/MultiRheoFlow}{GitHub}).
+\item You will have access to a read-to-use codebase (available on \href{https://comphy-lab.org/MultiRheoFlow}{GitHub}).
 \item As a part of the \href{https://comphy-lab.org}{CoMPhy lab}, you will learn and adapt open-source coding principles. 
 \item You will learn how to collaborate with a diverse group of researchers, specifically with other numericists, experimentalists and theoreticians.
 

@@ -14,6 +14,7 @@
 \usepackage{fontawesome5}
 \usepackage{multirow}
 \usepackage{hyperref}
+\usepackage{tcolorbox}
 \hypersetup{
     colorlinks,
     linkcolor={red!50!black},
@@ -21,6 +22,8 @@
     urlcolor={blue}
 }
 
+\definecolor{mgray}{gray}{0.85}
+\definecolor{mpurple}{HTML}{68236D}
 % Additional packages for the content
 \usepackage{float}
 \usepackage{subfig,wrapfig}
@@ -85,6 +88,12 @@ natbib=true]{biblatex}
     \end{LARGE}
 \end{center}
 
+\noindent A few line Description
+
+\begin{tcolorbox}[colback=mgray,colframe=mpurple,title=TL;DR]
+    Too long did not read ... 
+\end{tcolorbox}
+
 \section*{Description}
 
 \lipsum
@@ -111,7 +120,7 @@ natbib=true]{biblatex}
 \item ...
 \end{enumerate}
 
-If you have any questions, feel free to contact us \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org}/\href{mailto:vatsal.sanjay@durham.ac.uk}{vatsal.sanjay@durham.ac.uk} or drop by Ph255 at the Department of Physics at Durham University.
+If you have any questions, feel free to contact us \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org}/\\\href{mailto:vatsal.sanjay@durham.ac.uk}{vatsal.sanjay@durham.ac.uk} or drop by Ph255 (Rochester building) at the Department of Physics at Durham University.
 
 \vspace*{\headertobodysep}
 

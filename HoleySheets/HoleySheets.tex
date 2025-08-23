@@ -15,6 +15,7 @@
 \usepackage{fontawesome5}
 \usepackage{multirow}
 \usepackage{hyperref}
+\usepackage{tcolorbox}
 \hypersetup{
     colorlinks,
     linkcolor={red!50!black},
@@ -22,6 +23,8 @@
     urlcolor={blue}
 }
 
+\definecolor{mgray}{gray}{0.85}
+\definecolor{mpurple}{HTML}{68236D}
 % Additional packages for the content
 \usepackage{float}
 \usepackage{subfig,wrapfig}
@@ -86,43 +89,62 @@ natbib=true]{biblatex}
     \end{LARGE}
 \end{center}
 
+\noindent Ever watched a soap bubble burst? The same physics governs critical processes from COVID-19 transmission through respiratory droplets to agricultural spray efficiency—yet the mechanism triggering holes in micron-thick liquid sheets remains contested.
+
+\begin{tcolorbox}[colback=mgray,colframe=mpurple,title=TL;DR]
+    Micron-thick liquid sheets routinely develop holes despite Van der Waals forces only operating at nanometer scales—a paradox critical to understanding respiratory droplet transmission and spray technologies. This project investigates how submicron impurities (bubbles, oil droplets) trigger hole nucleation through local thinning effects. Using Basilisk C with CLSVOF interface tracking, you'll simulate radial drainage flows to map the double threshold for breakup: sufficient drainage rate and initial perturbation size. We will extend existing code to include thermal/chemical effects, perform systematic parameter sweeps, and develop scaling laws for hole formation. Ideal for students seeking hands-on CFD experience with immediate applications to aerosol physics and industrial atomization.
+\end{tcolorbox}
+
 \section*{Description}
 
-Droplets in uniform air flow frequently form bag-like structures that ultimately fragment. This fragmentation is critical for understanding several natural and industrial processes, like airborne disease transmission and agricultural pesticide application. 
-Although several previous studies have attributed hole formation and subsequent breakup to Van der Waals forces--relevant at molecular scales, many experiments show nucleation in thicker sheets, including those at the micron scale. How can that be? We hypothesize that impurities within liquid sheets, such as bubbles or oil droplets, can trigger hole nucleation at thicknesses much greater than molecular scales. 
-Using Basilisk C for direct numerical simulations and employing the Coupled-Level-Set-Volume-of-Fluid and Level-Set methods to resolve interfaces, we elucidate the mechanisms by which these impurities prompt hole formation during sheet drainage. 
-We use a simplified axially symmetric radial drainage model, imposing an outward velocity $u = \omega r$, where $\omega$ is the drainage rate, and $r$ is the radial distance (see figure \ref{fig:droplets2021}). This approach captures the essence of bag-like expansion that follows a free-fall like drainage while isolating the hole formation mechanism.
-We found that, even when impurities initiate hole formation, the film can heal if the radial driving is weak. Conversely, holes grow and lead to sheet breakup if the imposed flow rate and initial shape distortion are large.
-Moreover, smaller cavities consistently heal, whereas larger perturbations always open. Potential chemical or thermal inhomogeneities may further influence these dynamics, delaying hole nucleation. These findings reveal a double threshold for hole formation underlying the role of submicron impurities in droplet fragmentation -- the driving should be strong enough, and the initial shape distortions should be large enough -- refining existing models of droplet breakup and can guide design strategies in aerosol and spray processes.
-Several open questions emerge: How do specific impurities or surface agents affect hole formation thresholds? Does local heating or cooling shift the balance between healing and opening? Could non-Newtonian effects or external forcing alter these conclusions? Addressing these questions could refine droplet breakup models and guide future designs in aerosol and spray technologies—offering a rich avenue of study for a bachelor's or master's research project.
+When droplets encounter uniform airflow, they deform into bag-like structures that ultimately fragment through hole formation and growth. Classical theory attributes this breakup to Van der Waals forces operating at molecular scales ($\sim 10\,\text{nm}$), yet experiments routinely observe hole nucleation in sheets hundreds of times thicker. 
+This project tests a novel hypothesis: submicron impurities (bubbles, oil droplets) trigger hole formation at micron scales through local thinning and curvature effects. 
+Using direct numerical simulations with Coupled-Level-Set-Volume-of-Fluid (CLSVOF) methods in Basilisk C, we will map the parameter space governing impurity-driven breakup, establishing quantitative thresholds for hole opening versus healing. Our findings will refine predictive models for aerosol dynamics and spray technologies, with direct applications to disease transmission modeling and industrial atomization processes.
 
-\begin{figure}[h]
+\section*{Deep dive}
+
+To model the inflating bag formation, we use a simplified axially symmetric radial drainage model, imposing an outward velocity $u = \omega r$, where $\omega$ is the drainage rate, and $r$ is the radial distance (see figure \ref{fig:droplets2021}). This approach captures the essence of bag-like expansion that follows a free-fall like drainage while isolating the hole formation mechanism.
+We found that, even when impurities initiate hole formation, the film can heal if the radial driving is weak. Conversely, holes grow and lead to sheet breakup if the imposed flow rate and initial shape distortion are large.
+
+\begin{figure}
 \centering
 \includegraphics[width=\textwidth]{schematic_02.pdf}
 \caption{(a) Droplet in uniform airflow deforms and expands into a bag-like structure. The impurities inside the sheets can prompt breakup when the thickness is of micron order. (b) To model that, bubbles as a defect are simulated inside a simplified two-dimensional liquid draining sheet.}
 \label{fig:droplets2021}
 \end{figure}
 
-\section*{What you will do and what you will learn?}
-In the Physics of Fluids group, we are looking for enthusiastic students to join our newly established project on bursting of sandwiched liquid films.
+Moreover, smaller cavities consistently heal, whereas larger perturbations always open. Potential chemical or thermal inhomogeneities may further influence these dynamics, delaying hole nucleation. These findings reveal a double threshold for hole formation underlying the role of submicron impurities in droplet fragmentation-the driving should be strong enough, and the initial shape distortions should be large enough-refining existing models of droplet breakup and can guide design strategies in aerosol and spray processes.
+Several open questions emerge: 
 
 \begin{enumerate}
-\item You will learn about film bursting, Taylor-Culick retractions, and viscous dissipation. 
+    \item How do specific impurities or surface agents affect hole formation thresholds? 
+    \item Does local heating or cooling shift the balance between healing and opening?
+    \item  Could non-Newtonian effects or external forcing alter these conclusions?
+\end{enumerate}
+
+Addressing these questions could refine droplet breakup models and guide future designs in aerosol and spray technologies—offering a rich avenue of study for a bachelor's or master's research project.
+
+\section*{What you will do and what you will learn?}
+In Computational Multiphase Physics Lab, we are looking for enthusiastic students to join our newly established project on bursting of sandwiched liquid films.
+
+\begin{enumerate}
+\item You will learn about film bursting, Taylor--Culick retractions, and viscous dissipation. 
 \item You will work closely with experimentalists. 
-\item You will learn about the Computational Fluid Dynamics (CFD) fundamentals, and use the free software program Basilisk C \href{http://basilisk.dalembert.upmc.fr}{(http://basilisk.dalembert.upmc.fr)}.
+\item You will learn about the Computational Fluid Dynamics (CFD) fundamentals, and use the free software program \href{http://basilisk.fr}{Basilisk C}.
 \item You will have access to a read-to-use codebase (available on \href{https://github.com/comphy-lab/bubbleinSheet}{GitHub}).
 \item You will learn how to do basic and advanced scientific data analysis.
 \item As a part of the \href{https://comphy-lab.org}{CoMPhy lab}, you will learn and adapt open-source coding principles. 
 \end{enumerate}
 
-If you have any questions, feel free to contact us \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org}/\href{mailto:vatsal.sanjay@durham.ac.uk}{vatsal.sanjay@durham.ac.uk} or drop by Ph255 at the Department of Physics at Durham University.
+If you have any questions, feel free to contact us \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org}/\\\href{mailto:vatsal.sanjay@durham.ac.uk}{vatsal.sanjay@durham.ac.uk} or drop by Ph255 (Rochester building) at the Department of Physics at Durham University.
+
 \begin{center}
 \begin{tabular}{|l|l|l|}
 \hline \textbf{Collaborators} & \textbf{E-mail} & \textbf{Based at} \\
 \hline \multirow{2}{*}{Dr. Vatsal Sanjay} & \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org} & \multirow{2}{*}{Ph255 (Rochester building)} \\
 & \href{mailto:vatsal.sanjay@durham.ac.uk}{vatsal.sanjay@durham.ac.uk} & \\
-\hline Ayush Dixit & \href{mailto:a.k.dixit@utwente.nl}{a.k.dixit@utwente.nl} & Univ. Twente \\
-\hline Prof. Dr. Detlef Lohse & \href{mailto:d.lohse@utwente.nl}{d.lohse@utwente.nl} & Univ. Twente  \\
+\hline Ayush Dixit M.Sc. & \href{mailto:a.k.dixit@utwente.nl}{a.k.dixit@utwente.nl} & Univ. Twente \\
+\hline Prof. Dr. Detlef Lohse F.R.S. & \href{mailto:d.lohse@utwente.nl}{d.lohse@utwente.nl} & Univ. Twente  \\
 \hline
 \end{tabular}
 \end{center}
@@ -131,4 +153,5 @@ If you have any questions, feel free to contact us \href{mailto:vatsal.sanjay@co
 \noindent\textit{Last updated: \today}
 
 \printbibliography
+
 \end{document}

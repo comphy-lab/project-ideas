@@ -15,6 +15,7 @@
             citecolor=MyBlue,
             urlcolor=MyBlue]{hyperref}
 \usepackage[all]{hypcap}
+\usepackage{tcolorbox}
 \usepackage[url=false,
 backend=bibtex,
 style=authoryear-comp,
@@ -29,6 +30,9 @@ natbib=true]{biblatex}
 \renewbibmacro{in:}{}
 
 \addbibresource{../_logosAndRef/references.bib}
+
+\definecolor{mgray}{gray}{0.85}
+\definecolor{mpurple}{HTML}{68236D}
 \nonfrenchspacing
 
 \begin{document}
@@ -39,13 +43,24 @@ natbib=true]{biblatex}
  \end{LARGE}
 \end{center}
 
+\noindent Ever wondered how astronaut Scott Kelly (\href{https://www.youtube.com/watch?v=TLbhrMCM4_0}{link here}) played ping-pong with water drops in space? This phenomenon reveals fundamental physics of liquid-solid interactions that we're only beginning to understand.
+
+
+\begin{tcolorbox}[colback=mgray,colframe=mpurple,title=TL;DR]
+	Investigate how liquid droplets bounce off superhydrophobic surfaces through computational simulations, exploring phenomena from Scott Kelly's space ping-pong (\href{https://www.youtube.com/watch?v=TLbhrMCM4_0}{link here}) to hydrodynamic singularities. Using in-house CFD code, you'll map bouncing dynamics across the control parameter space, quantify force profiles and dissipation mechanisms, and investigate Worthington jet formation. The project addresses fundamental questions about viscous dissipation anomalies and singular behaviour in droplet impact, with applications in spray technology and microfluidics. Join the CoMPhy Lab to develop skills in computational fluid dynamics, data analysis, and open-source scientific computing while working with international collaborators at Durham University and University of Twente.
+\end{tcolorbox}
+
 \section*{Description}
 
-Recently, during one of his trips to the International Space Station, astronaut Scott Kelly demonstrated that one could play ping-pong in space using water drops (\href{https://www.youtube.com/watch?v=TLbhrMCM4_0}{link here}). This demonstration follows from a long history of research on bouncing drops on superhydrophobic surfaces (see the discussions related to bouncing off superhydrophobic surfaces in \citet{josserand2016drop, VatsalThesis}).\\
 
-In this study, we would like to further our understanding of this process of bouncing droplets \citep{zhang2022impact, vatsalInProgress, sanjay2022drop}. A typical sequence of events is shown in Figure~\ref{Figure::Typical}. In our simulation, we will use an in-house developed read-to-use code to solve the problem of the liquid drop impact on non-wetting substrates. We will focus on the hydrodynamics of the process. 
+Droplet impact on superhydrophobic surfaces exhibits remarkable behaviours -- from complete bouncing to singular jet formation -- that challenge our understanding of fluid mechanics. Despite over a century of research \citep{worthington1877xxviii,sanjayUnifyingTheoryScaling2025}, critical questions remain about force transmission, viscous dissipation anomalies, and hydrodynamic singularities during impact. 
+This project aims to quantify the dynamics of bouncing droplets through high-fidelity computational fluid dynamics (CFD) simulations, focusing on the interplay between inertia, capillarity, and viscous dissipation. Using an in-house developed simulation code, you will explore parameter regimes from inertial-dominated to capillary-dominated impacts, characterize force profiles and coefficients of restitution, and investigate the formation of Worthington jets and bubble entrainment. Expected outcomes include a comprehensive map of bouncing behaviors across dimensionless parameter space and insights into dissipation mechanisms in the vanishing viscosity limit. This work advances our fundamental understanding of droplet dynamics with applications ranging from spray coating to inkjet printing and microfluidics.
 
-\begin{figure}[H]
+\section*{Deep dive}
+
+A typical sequence of events is shown in Figure~\ref{Figure::Typical}. The impact process involves multiple stages: (a) approach with constant velocity, (b) inertial shock upon contact, (c,d) radial spreading with pyramidal deformation due to propagating capillary waves, (e) air cavity formation from converging waves, and (f,g) cavity collapse leading to bubble entrainment and Worthington jet formation—a hydrodynamic singularity. The dynamics are governed by the Navier–Stokes equations with surface tension, characterised by the Weber number $We = \rho V^2D/\gamma$ (inertia vs. surface tension), Reynolds number $Re = \rho VD/\eta$ (inertia vs. viscosity), and in the low-velocity limit, the Ohnesorge number $Oh = \eta/\sqrt{\rho\gamma D}$ (viscous vs. capillary timescales).
+
+\begin{figure}
 \begin{center}
  \includegraphics[width=\textwidth]{SingularJets.eps}
  \caption{A typical simulation of a drop bouncing off a superhydrophobic substrate: (a) impacting drop with a constant velocity, (b) inertial shock as the drop hits the substrate, (c, d) the drop spreads on the substrate forming pyramidal shape owing to the propagating capillary waves on the surface of the drop \citep{renardy2003pyramidal, zhang2022impact}, (e) converging capillary waves create an air cavity, and (f, g) collapse of the air cavity entrains a bubble inside the drop and forms a thin and fast Worthington jet reminiscent of the hydrodynamic singularity \citep{Bartolo2006Singular}.}
@@ -60,11 +75,11 @@ In the Physics of Fluids group, we are looking for enthusiastic students to work
 \item You will learn about fundamental fluid dynamics.
 \item You will get hands-on experience with Computational Fluid Dynamics (CFD).
 \item You will learn how to do basic and advanced data analysis.
-\item You will learn how to document and publish ready-to-use codes and share them with the community, similar to \citet{basiliskVatsal, basiliskVatsalDropFilm, basiliskVatsalViscousBouncing}. 
+\item You will learn how to document and publish read-to-use codes and share them with the community, similar to \citet{basiliskVatsal, basiliskVatsalDropFilm, basiliskVatsalViscousBouncing}. 
 \item As a part of the \href{https://comphy-lab.org}{CoMPhy lab}, you will learn and adapt open-source coding principles. 
 \end{enumerate}
 
-As a part of your bachelor's/master's assignment, we would like you to explore the field and come up with exciting avenues. To get you started, here is a list of open questions:
+As a part of your assignment, we would like you to explore the field and come up with exciting avenues. To get you started, here is a list of open questions:
 
 \begin{enumerate}
  \item How much force does the drop apply on the substrate? How does this force depend on the properties of the drop and the substrate properties?
@@ -77,10 +92,11 @@ If you have any questions, feel free to contact \href{mailto:a.k.dixit@utwente.n
 \begin{center}
 \begin{tabular}{|l|l|l|}
 \hline \textbf{Supervision} & \textbf{E-mail} & \textbf{Office} \\
-\hline Ayush Dixit & \href{mailto:a.k.dixit@utwente.nl}{a.k.dixit@utwente.nl} & Meander 250 \\
+\hline Ayush Dixit M.Sc. & \href{mailto:a.k.dixit@utwente.nl}{a.k.dixit@utwente.nl} & Meander 250 \\
+\hline Aman Bhargava M.Sc. & \href{mailto:a.s.bhargava@utwente.nl}{a.s.bhargava@utwente.nl} & Meander 249 \\
 \hline \multirow{2}{*}{Dr. Vatsal Sanjay} & \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org} & \multirow{2}{*}{Durham University} \\
 & \href{mailto:vatsal.sanjay@durham.ac.uk}{vatsal.sanjay@durham.ac.uk} & \\
-\hline Prof. Dr. Detlef Lohse & \href{mailto:d.lohse@utwente.nl}{d.lohse@utwente.nl} & Meander 261  \\
+\hline Prof. Dr. Detlef Lohse F.R.S. & \href{mailto:d.lohse@utwente.nl}{d.lohse@utwente.nl} & Meander 261  \\
 \hline
 \end{tabular}
 \end{center}

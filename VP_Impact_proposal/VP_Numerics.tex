@@ -87,11 +87,22 @@ natbib=true]{biblatex}
     \end{LARGE}
 \end{center}
 
+\noindent Ever wondered why ketchup refuses to flow until you shake the bottle, or how toothpaste maintains its shape on your brush despite gravity? These everyday substances exhibit yield-stress that defy our intuition about how liquids should behave.
+
+\begin{tcolorbox}[colback=mgray,colframe=mpurple,title=TL;DR]
+This project investigates thermoresponsive viscoplastic gels that transition from Newtonian to yield-stress behavior with temperature—crucial for inkjet printing applications. Using Direct Numerical Simulations in Basilisk C, we will study hot droplet impacts on cold substrates, capturing real-time gel network formation and its effect on droplet morphology. Students will implement temperature-dependent rheological models, conduct parametric studies varying yield stress and shear-thinning parameters, and correlate simulations with experimental data from our collaborators. The work bridges fundamental non-Newtonian fluid mechanics with industrial applications, offering experience in computational rheology, high-performance computing, and academic-industrial collaboration.
+\end{tcolorbox}
+
 \section*{Description}
-Viscoplastic/yield-stress fluids are commonly observed in our daily life, like toothpaste, ketchup, and hair gel, which unlike Newtonian liquids, do not flow under the influence of gravity when inverted. A new class of yield-stress fluids is thermoresponsive viscoplastic gels, which are frequently used in inkjet printing applications. These gels show viscoplastic shear-thinning behavior at low temperatures due to the presence of a gel network. However, at high temperatures, the gel network dissolves, and the liquid shows Newtonian behavior. In this project, we aim to understand what happens when a droplet of such liquid impacts on a flat, horizontal substrate (Figure~\ref{Fig::Fig1}(a)). The droplet is initially at a high temperature exhibiting Newtonian behavior. However, when it impacts a substrate at low temperature, the gel network starts to form, and viscoplastic behavior is observed (Figure~\ref{Fig::Fig1}(b)). Furthermore, as the droplet recoils back, a clear distinction between a Newtonian and a high yield stress drop can be observed (Figure~\ref{Fig::Fig1}(c)). For this work, we will use Direct Numerical Simulations of the drop impact of yield stress fluids. One of the deliverables will be to understand the effect of yield stress and shear thinning behavior on the droplet's post-impact morphology. The work is part of an academic-industrial collaboration and provides the opportunity to study interesting, complex physics and solve real-world problems. 
+Viscoplastic/yield-stress fluids are commonly observed in our daily life, like toothpaste, ketchup, and hair gel, which unlike Newtonian liquids, do not flow under the influence of gravity when inverted. 
+This project investigates thermoresponsive viscoplastic gels—materials crucial for inkjet printing applications—which undergo dramatic rheological transitions with temperature. At high temperatures, these gels behave as Newtonian fluids due to dissolved gel networks, while at low temperatures, they exhibit viscoplastic shear-thinning behavior. We aim to understand the complex physics when hot droplets of such materials impact cold substrates, capturing the real-time formation of gel networks and the transition from Newtonian to viscoplastic behavior.
+Using Direct Numerical Simulations (DNS), we will map how yield stress and shear-thinning parameters control post-impact droplet morphology. This work, conducted through an academic-industrial collaboration with Canon printing company, bridges fundamental fluid mechanics with real-world printing applications, potentially optimizing industrial processes where precise control of droplet deposition is critical.
+
+\section*{Deep dive}
+In this project, we aim to understand what happens when a droplet of such liquid impacts on a flat, horizontal substrate (Figure~\ref{Fig::Fig1}(a)). We model thermoresponsive gels using the Herschel-Bulkley constitutive equation, capturing both yield stress and shear-thinning behavior through the power-law index. The temperature-dependent rheology couples to heat transfer through the gel network formation kinetics. The droplet is initially at a high temperature exhibiting Newtonian behavior. However, when it impacts a substrate at low temperature, the gel network starts to form, and viscoplastic behavior is observed (Figure~\ref{Fig::Fig1}(b)). Furthermore, as the droplet recoils back, a clear distinction between a Newtonian and a high yield stress drop can be observed (Figure~\ref{Fig::Fig1}(c)). 
 \begin{figure}[H]
  \begin{center}
-  \includegraphics[width= 0.65\textwidth]{ProposalPicture.eps}
+  \includegraphics[width= 0.7\textwidth]{ProposalPicture.eps}
  \end{center}
  \caption{Yield stress drop impact on solid substrate.}
  \label{Fig::Fig1}
@@ -99,10 +110,11 @@ Viscoplastic/yield-stress fluids are commonly observed in our daily life, like t
 
 \section*{What you will do and what you will learn?}
 In the Physics of Fluids group, we are looking for enthusiastic students to join our newly established project on thermoresponsive gels. 
+
 \begin{enumerate}
 	\item You will learn about rheology of complex non-Newtonian fluids. 
-	\item You will work with experimentalists and our industrial collaborators at Canon printing company.
-	\item You will learn about the Computational Fluid Dynamics (CFD) fundamentals, and use the free software program Basilisk C \href{http://basilisk.dalembert.upmc.fr}{(http://basilisk.dalembert.upmc.fr)}. 
+	\item You will work with experimentalists.
+	\item You will learn about the Computational Fluid Dynamics (CFD) fundamentals, and use the free software program \href{http://basilisk.fr}{Basilisk C} using the collaboration through \href{https://github.com/comphy-lab/VP-DropImpact}{GitHub}.
 	\item You will learn how to do basic and advanced scientific data analysis. 
 	\item As a part of the \href{https://comphy-lab.org}{CoMPhy lab}, you will learn and adapt open-source coding principles. 
 \end{enumerate}

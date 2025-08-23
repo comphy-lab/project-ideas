@@ -83,36 +83,42 @@ natbib=true]{biblatex}
 
 \begin{center}
     \begin{LARGE}
-     Sneezing droplets
+        Sneezing droplets: Modeling of respiratory droplet formation
     \end{LARGE}
 \end{center}
 
+\noindent Ever wondered why a sneeze produces such a specific pattern of droplets? The physics behind this everyday phenomenon holds keys to understanding airborne disease transmission.
+
+\begin{tcolorbox}[colback=mgray,colframe=mpurple,title=TL;DR]
+    Understanding droplet distributions from respiratory actions remains a key scientific challenge. While Newtonian fluid breakup under airflow is well understood, human respiratory fluids exhibit viscoelastic behavior that fundamentally alters these dynamics. This project numerically investigates how viscoelasticity affects filament breakup -- the second stage of droplet formation where liquid filaments fragment into individual droplets. Using state-of-the-art computational fluid dynamics, we will simulate viscoelastic filament dynamics and compare results with existing Newtonian data to isolate elasticity's role. The findings will improve droplet size distribution predictions during respiratory events, informing airborne disease transmission mitigation strategies.
+\end{tcolorbox}
+
 \section*{Description}
 
-During the COVID-19 pandemic, many of us wondered how viruses are transmitted from one person to another. It turns out that when we cough, sneeze, or speak, we produce numerous droplets that play a crucial role in spreading these viruses \citep{bourouiba2021fluid}. Understanding the final droplet distribution during such respiratory actions has been the aim of the scientific community ever since. 
+During the COVID-19 pandemic, many of us wondered how viruses are transmitted from one person to another. It turns out that when we cough, sneeze, or speak, we produce numerous droplets that play a crucial role in spreading these viruses \citep{bourouiba2021fluid}. Understanding droplet distributions from respiratory actions remains a key scientific challenge. While Newtonian fluid breakup under airflow is well understood, human respiratory fluids exhibit viscoelastic behavior that fundamentally alters these dynamics. This project numerically investigates how viscoelasticity affects filament breakup -- the second stage of droplet formation where liquid filaments fragment into individual droplets. Using state-of-the-art computational fluid dynamics, you will simulate viscoelastic filament dynamics and compare results with existing Newtonian data to isolate elasticity's role. The findings will improve droplet size distribution predictions during respiratory events, informing airborne disease transmission mitigation strategies.
 
-From a physics perspective, coughing or sneezing can be understood as airflow over a thin liquid layer attached to a surface \citep{kant2023bag}. This phenomenon is well understood for Newtonian fluids. However, this understanding does not apply well to human coughs, as mucosalivary fluids exhibit non-Newtonian (viscoelastic) behavior. Consequently, we lack a comprehensive understanding of the influence of non-Newtonian effects on the overall dynamics. We have recently made efforts to understand the non-Newtonian effects of jet breakup (see \citet{dixit2024viscoelastic}).
+\begin{figure}
+    \begin{center}
+     \includegraphics[width=\textwidth]{sneeze.png}
+     \caption{Stages of sneeze ejecta as experimentally reported by \citet{scharfman2016visualization}. One can notice several long filaments breaking up into droplets.}
+     \label{Figure::Typical}
+    \end{center}
+    \end{figure}
+    
+    \begin{figure}
+        \begin{center}
+            \includegraphics[width=\textwidth]{filament_01.pdf}
+            \caption{(a) Sketch of the initial filament, and (b) the final shapes obtained for different values of filament length $L_0$, studied for Newtonian fluids by \citet{anthony2019dynamics}. }
+            \label{fig:filament}
+        \end{center}
+    \end{figure}
+\section*{Deep dive}
+
+From a physics perspective, coughing or sneezing can be understood as airflow over a thin liquid layer attached to a surface \citep{kant2023bag}. This phenomenon is well understood for Newtonian fluids. However, this understanding does not apply well to human coughs, as mucosalivary fluids exhibit non-Newtonian (viscoelastic) behavior. Consequently, we lack a comprehensive understanding of the influence of non-Newtonian effects on the overall dynamics. We have recently made efforts to understand the non-Newtonian effects of jet breakup (see \citet{dixit2024viscoelastic,liViscoelasticityReducesDroplet2025}).
 
 During coughing, breakup of mucosalivary fluids into droplets occurs in two steps. The first step involves breaking liquid sheets into filaments, while the second step involves breaking those filaments into droplets. For Newtonian liquids, the overall dynamics are governed by competition among three physical effects: capillarity, viscosity, and inertia \citep{anthony2019dynamics}. However, for mucosalivary fluids, which display viscoelastic properties, elasticity also plays a crucial role \citep{sen2021retraction, liu2022contraction}. Understanding these dynamics, along with the resulting droplet size, is essential for analyzing sneeze droplets and developing effective strategies to mitigate airborne disease transmission.
 
 You will numerically study the dynamics of viscoelastic filament breakup into droplets (see figure \ref{fig:filament}). We will examine the overall dynamics and droplet size and compare our results with existing data on Newtonian fluids \citep{anthony2019dynamics}. Finally, we will apply our analysis to understand droplet distribution during coughing or sneezing. 
-
-
-\begin{figure}[H]
-\begin{center}
- \includegraphics[width=0.95\textwidth]{sneeze.png}
- \caption{Stages of sneeze ejecta as experimentally reported by \citet{scharfman2016visualization}. One can notice several long filaments breaking up into droplets.}
- \label{Figure::Typical}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.75\textwidth]{filament_01.pdf}
-		\caption{(a) Sketch of the initial filament, and (b) the final shapes obtained for different values of filament length $L_0$, studied for Newtonian fluids by \citet{anthony2019dynamics}. }
-		\label{fig:filament}
-	\end{center}
-\end{figure}
 
 \section*{What you will do and what you will learn?}
 % The project will focus on the following:

@@ -46,3 +46,4 @@ Z_PlanningInFuture
 **/*.synctex.gz
 **/*.synctex.gz(busy)
 **/*.pdfsync
+**/.claude

@@ -1,0 +1,133 @@
+
+\documentclass[11pt]{article}    
+\usepackage[a4paper,left=1in,right=1in,top=1in,bottom=1in]{geometry} 
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage{seqsplit}
+
+\renewcommand{\familydefault}{\sfdefault} 
+\usepackage{setspace}  \singlespacing  
+\usepackage{graphicx}        
+\usepackage[absolute]{textpos}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{multirow}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue}
+}
+
+% Additional packages for the content
+\usepackage{float}
+\usepackage{subfig,wrapfig}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{fancyhdr,fancybox,color}
+\usepackage{epstopdf}
+\usepackage{enumerate}
+\usepackage[amssymb]{SIunits}
+\definecolor{MyBlue}{rgb}{0,0.3,0.6}
+\usepackage[all]{hypcap}
+\usepackage{csquotes}
+\usepackage[url=false,
+backend=bibtex,
+style=authoryear-comp,
+doi=true,
+isbn=true,
+backref=false,
+dashed=false,
+maxcitenames=2,
+maxbibnames=99,
+natbib=true]{biblatex}
+\DeclareNameAlias{author}{family-given}
+\renewbibmacro{in:}{}
+\addbibresource{../_logosAndRef/references.bib}
+\nonfrenchspacing
+
+% Configurable separation between header and body
+\newlength{\headertobodysep}
+\setlength{\headertobodysep}{1cm}
+
+% Header with logos and contact information
+\begin{document}
+\thispagestyle{empty}
+
+% Lean header with aligned elements
+\textblockorigin{0pt}{0pt}
+
+% Durham logo on the left
+\begin{textblock*}{5cm}(0.5cm,1cm)
+    \includegraphics[height=2cm]{../_logosAndRef/Durham-University.pdf}
+\end{textblock*}
+
+% Contact information in the center - vertically centered with logos
+\begin{textblock*}{9cm}(6cm,1.5cm)
+    \centering
+    {\large \textbf{Holey sheets | CoMPhy Lab}}\\[0.2em]
+    Department of Physics, Durham University\\[0.3em]
+    \href{https://comphy-lab.org}{comphy-lab.org}
+\end{textblock*}
+
+% CoMPhy logo aligned with right margin
+\begin{textblock*}{5cm}(15.5cm,1cm) % exactly 1 cm away from the right edge
+    \includegraphics[height=2cm]{../_logosAndRef/CoMPhy-Lab.png}
+\end{textblock*}
+
+% Reset to normal text flow after header
+\vspace*{\headertobodysep}
+
+\begin{center}
+    \begin{LARGE}
+     Holey sheets: Bursting of liquid films
+    \end{LARGE}
+\end{center}
+
+\section*{Description}
+
+Droplets in uniform air flow frequently form bag-like structures that ultimately fragment. This fragmentation is critical for understanding several natural and industrial processes, like airborne disease transmission and agricultural pesticide application. 
+Although several previous studies have attributed hole formation and subsequent breakup to Van der Waals forces--relevant at molecular scales, many experiments show nucleation in thicker sheets, including those at the micron scale. How can that be? We hypothesize that impurities within liquid sheets, such as bubbles or oil droplets, can trigger hole nucleation at thicknesses much greater than molecular scales. 
+Using Basilisk C for direct numerical simulations and employing the Coupled-Level-Set-Volume-of-Fluid and Level-Set methods to resolve interfaces, we elucidate the mechanisms by which these impurities prompt hole formation during sheet drainage. 
+We use a simplified axially symmetric radial drainage model, imposing an outward velocity $u = \omega r$, where $\omega$ is the drainage rate, and $r$ is the radial distance (see figure \ref{fig:droplets2021}). This approach captures the essence of bag-like expansion that follows a free-fall like drainage while isolating the hole formation mechanism.
+We found that, even when impurities initiate hole formation, the film can heal if the radial driving is weak. Conversely, holes grow and lead to sheet breakup if the imposed flow rate and initial shape distortion are large.
+Moreover, smaller cavities consistently heal, whereas larger perturbations always open. Potential chemical or thermal inhomogeneities may further influence these dynamics, delaying hole nucleation. These findings reveal a double threshold for hole formation underlying the role of submicron impurities in droplet fragmentation -- the driving should be strong enough, and the initial shape distortions should be large enough -- refining existing models of droplet breakup and can guide design strategies in aerosol and spray processes.
+Several open questions emerge: How do specific impurities or surface agents affect hole formation thresholds? Does local heating or cooling shift the balance between healing and opening? Could non-Newtonian effects or external forcing alter these conclusions? Addressing these questions could refine droplet breakup models and guide future designs in aerosol and spray technologies—offering a rich avenue of study for a bachelor's or master's research project.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{schematic_02.pdf}
+\caption{(a) Droplet in uniform airflow deforms and expands into a bag-like structure. The impurities inside the sheets can prompt breakup when the thickness is of micron order. (b) To model that, bubbles as a defect are simulated inside a simplified two-dimensional liquid draining sheet.}
+\label{fig:droplets2021}
+\end{figure}
+
+\section*{What you will do and what you will learn?}
+In the Physics of Fluids group, we are looking for enthusiastic students to join our newly established project on bursting of sandwiched liquid films.
+
+\begin{enumerate}
+\item You will learn about film bursting, Taylor-Culick retractions, and viscous dissipation. 
+\item You will work closely with experimentalists. 
+\item You will learn about the Computational Fluid Dynamics (CFD) fundamentals, and use the free software program Basilisk C \href{http://basilisk.dalembert.upmc.fr}{(http://basilisk.dalembert.upmc.fr)}.
+\item You will have access to a read-to-use codebase (available on \href{https://github.com/comphy-lab/bubbleinSheet}{GitHub}).
+\item You will learn how to do basic and advanced scientific data analysis.
+\item As a part of the \href{https://comphy-lab.org}{CoMPhy lab} at the Physics of Fluids Dept., you will learn and adapt open-source coding principles. 
+\end{enumerate}
+
+If you have any questions, feel free to contact us \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org}/\href{mailto:vatsal.sanjay@durham.ac.uk}{vatsal.sanjay@durham.ac.uk} or drop by Ph255 at the Department of Physics at Durham University.
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline \textbf{Collaborators} & \textbf{E-mail} & \textbf{Based at} \\
+\hline Dr. Vatsal Sanjay & \href{mailto:vatsal.sanjay@comphy-lab.org}{vatsal.sanjay@comphy-lab.org} & Ph255 (Rochester building) \\
+\hline Ayush Dixit & \href{mailto:a.k.dixit@utwente.nl}{a.k.dixit@utwente.nl} & Univ. Twente \\
+\hline Prof. Dr. Detlef Lohse & \href{mailto:d.lohse@utwente.nl}{d.lohse@utwente.nl} & Univ. Twente  \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+\noindent\textit{Last updated: \today}
+
+\printbibliography
+\end{document}

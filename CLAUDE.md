@@ -10,7 +10,9 @@ This is an academic research project repository for the CoMPhy Lab (Computationa
 
 ### Compilation
 - **Compile all projects**: `./compile_all_recursive.sh` - Recursively finds and compiles all .tex files in subdirectories with proper bibliography processing
+- **Compile one project**: `./compile_all_recursive.sh --file DropImpact/BouncingDrops.tex` - Compiles just the requested `.tex` file from its own directory
 - **Clean temporary files**: `./compile_all_recursive.sh --clean` - Removes LaTeX auxiliary files while preserving PDFs and synctex files
+- **Clean one project**: `./compile_all_recursive.sh --clean --file DropImpact/BouncingDrops.tex` - Cleans only the requested `.tex` file's auxiliary files
 - **Manual compilation**: In any project directory, run standard LaTeX workflow:
   ```bash
   pdflatex -synctex=1 filename.tex
@@ -92,7 +94,7 @@ Each project directory contains:
 
 ### Compilation Workflow
 The `compile_all_recursive.sh` script handles the complete LaTeX workflow:
-1. **Discovery**: Recursively finds all .tex files
+1. **Discovery**: Recursively finds all .tex files, or targets one explicit `.tex` path
 2. **Directory-aware compilation**: Changes to each project directory for compilation
 3. **Bibliography processing**: Automatically runs bibtex when .bib files are present
 4. **Multi-pass compilation**: Three pdflatex passes for proper cross-references

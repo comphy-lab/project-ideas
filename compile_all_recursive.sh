@@ -20,7 +20,9 @@ TOTAL_TEX_FILES=0
 COMPILE_COUNT=0
 SUCCESS_COUNT=0
 FAILED_FILES=()
+TEX_FILES=()
 START_DIR=""
+TARGET_FILE=""
 
 # Function to print colored output
 print_status() {
@@ -38,25 +40,47 @@ print_header() {
     echo
 }
 
-# Function to find all .tex files recursively
-find_tex_files() {
+# Function to collect .tex files, optionally targeting one file
+collect_tex_files() {
+    TEX_FILES=()
+
+    if [ -n "$TARGET_FILE" ]; then
+        print_status "$CYAN" "🎯 Targeting requested .tex file..."
+
+        if [ ! -f "$TARGET_FILE" ]; then
+            print_status "$RED" "❌ Requested .tex file not found: $TARGET_FILE"
+            exit 1
+        fi
+
+        if [[ "$TARGET_FILE" != *.tex ]]; then
+            print_status "$RED" "❌ Requested file is not a .tex file: $TARGET_FILE"
+            exit 1
+        fi
+
+        TEX_FILES+=("$TARGET_FILE")
+        TOTAL_TEX_FILES=1
+
+        print_status "$GREEN" "📁 Found 1 .tex file:"
+        print_status "$YELLOW" "   → $TARGET_FILE"
+        echo
+        return
+    fi
+
     print_status "$CYAN" "🔍 Scanning for .tex files..."
-    
-    # Use find to get all .tex files, excluding hidden directories
-    local tex_files=()
+
     while IFS= read -r -d '' file; do
-        tex_files+=("$file")
+        TEX_FILES+=("$file")
     done < <(find . -name "*.tex" -type f -not -path "*/.*" -print0)
-    
-    TOTAL_TEX_FILES=${#tex_files[@]}
-    
+
+    TOTAL_TEX_FILES=${#TEX_FILES[@]}
+
     if [ $TOTAL_TEX_FILES -eq 0 ]; then
         print_status "$RED" "❌ No .tex files found in current directory or subdirectories"
         exit 1
     fi
-    
+
     print_status "$GREEN" "📁 Found $TOTAL_TEX_FILES .tex file(s):"
-    for file in "${tex_files[@]}"; do
+    for file in "${TEX_FILES[@]}"; do
         print_status "$YELLOW" "   → $file"
     done
     echo
@@ -193,16 +217,20 @@ clean_temp_files() {
 show_usage() {
     echo "Usage: $0 [OPTIONS]"
     echo
-    echo "Recursively finds and compiles all .tex files in subdirectories."
+    echo "Recursively finds and compiles all .tex files in subdirectories,"
+    echo "or compile one specific .tex file."
     echo
     echo "OPTIONS:"
+    echo "  -f, --file PATH  Compile only the specified .tex file"
     echo "  -h, --help     Show this help message"
     echo "  -c, --clean    Clean temporary files only (no compilation)"
     echo "  -v, --verbose  Show detailed compilation output (not implemented)"
     echo
     echo "EXAMPLES:"
     echo "  $0                    # Compile all .tex files recursively"
+    echo "  $0 --file DropImpact/BouncingDrops.tex"
     echo "  $0 --clean           # Clean temporary files in all subdirectories"
+    echo "  $0 --clean --file DropImpact/BouncingDrops.tex"
 }
 
 # Function to clean all temporary files recursively
@@ -211,8 +239,7 @@ clean_all_temp_recursive() {
     
     local cleaned_dirs=0
     
-    # Find all directories containing .tex files
-    while IFS= read -r -d '' tex_file; do
+    for tex_file in "${TEX_FILES[@]}"; do
         local dir_path="$(dirname "$tex_file")"
         local tex_filename="$(basename "$tex_file")"
         local basename="${tex_filename%.tex}"
@@ -228,7 +255,7 @@ clean_all_temp_recursive() {
         else
             print_status "$RED" "❌ Error: Cannot access directory $dir_path"
         fi
-    done < <(find . -name "*.tex" -type f -not -path "*/.*" -print0)
+    done
     
     if [ $cleaned_dirs -eq 0 ]; then
         print_status "$YELLOW" "No .tex files found to clean"
@@ -295,6 +322,15 @@ main() {
                 clean_only=true
                 shift
                 ;;
+            -f|--file)
+                if [ -z "${2:-}" ]; then
+                    print_status "$RED" "❌ Missing path after $1"
+                    show_usage
+                    exit 1
+                fi
+                TARGET_FILE="$2"
+                shift 2
+                ;;
             -v|--verbose)
                 # Placeholder for future verbose mode
                 print_status "$YELLOW" "⚠️  Verbose mode not yet implemented"
@@ -310,28 +346,17 @@ main() {
     
     print_header
     
+    collect_tex_files
+    
     # If clean only mode
     if [ "$clean_only" = true ]; then
         clean_all_temp_recursive
         exit 0
     fi
     
-    # Find all .tex files
-    find_tex_files
-    
-    local tex_files=()
-    while IFS= read -r -d '' file; do
-        tex_files+=("$file")
-    done < <(find . -name "*.tex" -type f -not -path "*/.*" -print0)
-    
-    if [ ${#tex_files[@]} -eq 0 ]; then
-        print_status "$RED" "❌ No .tex files found"
-        exit 1
-    fi
-    
     # Compile each file in its directory
     local file_counter=0
-    for tex_file in "${tex_files[@]}"; do
+    for tex_file in "${TEX_FILES[@]}"; do
         ((file_counter++))
         echo
         print_status "$PURPLE" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -353,4 +378,3 @@ main() {
 
 # Run main function with all arguments
 main "$@"
-

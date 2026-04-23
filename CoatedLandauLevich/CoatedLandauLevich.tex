@@ -32,9 +32,13 @@
 \usepackage[amssymb]{SIunits}
 \definecolor{MyBlue}{rgb}{0,0.3,0.6}
 \usepackage[all]{hypcap}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing,patterns,calc}
 \usepackage{csquotes}
 \usepackage[url=false,
-backend=bibtex,
+backend=biber,
 style=authoryear-comp,
 doi=true,
 isbn=true,
@@ -97,15 +101,108 @@ Two further controls enter from the liquid side and the coating itself. If the p
 
 \begin{figure}[H]
     \begin{center}
-        % TBD: schematic -- clean Landau--Levich meniscus (left) vs patchy substrate (right)
-        % Suggested panels:
-        %   (a) Homogeneous plate: static meniscus + dynamic meniscus matching region,
-        %       film of thickness h = l_c Ca^{2/3}, labels for l_c, l_c Ca^{1/3}, h, U.
-        %   (b) Patchy plate: contact line pinned on soft patches of size l_p;
-        %       area fraction phi; patches shown smaller than, comparable to, and
-        %       larger than the dynamic-meniscus length in three sub-panels so
-        %       the Lambda < 1, Lambda ~ 1, Lambda > 1 regimes are visible.
-        \fbox{\parbox{0.9\textwidth}{\centering \vspace{2cm} Figure~1 placeholder: \\ clean Landau--Levich meniscus vs pinning on a patchy coating \vspace{2cm}}}
+        \begin{tikzpicture}[font=\small, >=Stealth]
+
+          %=== Panel (a): clean homogeneous plate ===
+          \begin{scope}
+            % Bath liquid
+            \fill[cyan!10] (0.1,-2) rectangle (5,0);
+            % Plate body
+            \fill[gray!35] (-0.55,-2) rectangle (0.1,3.8);
+            \draw[gray!60, semithick] (0.1,-2) -- (0.1,3.8);
+            % Entrained film on plate
+            \fill[cyan!35] (0.1,0.9) rectangle (0.25,3.8);
+            \draw[blue!55, thin] (0.25,0.9) -- (0.25,3.8);
+            % Meniscus curve
+            \draw[blue!80, line width=1.6pt]
+              (0.25,0.9) .. controls (0.7,0.55) and (2.2,0.1) .. (5,0);
+            % Flat bath surface beyond meniscus
+            \draw[blue!65, semithick] (5,0) -- (5.5,0);
+            % Withdrawal velocity arrow
+            \draw[->, thick] (-0.35,-0.6) -- (-0.35,1.2) node[above] {$U$};
+            % lm brace (dynamic meniscus height)
+            \draw[decorate, decoration={brace, amplitude=5pt, mirror}, mpurple, thick]
+              (-0.70,0) -- (-0.70,0.9)
+              node[midway, left=6pt, mpurple, align=right]
+              {$\ell_m \sim \ell_c\,\mathrm{Ca}^{1/3}$};
+            % h annotation (film thickness)
+            \draw[<->, red!65, semithick] (0.12,0.9) -- (0.12,3.8);
+            \node[red!65, right=3pt] at (0.25,2.35) {$h \sim \ell_c\,\mathrm{Ca}^{2/3}$};
+            % lc annotation (static meniscus horizontal scale)
+            \draw[<->, gray!60, semithick] (0.25,-1.6) -- (5,-1.6)
+              node[midway, fill=white, inner sep=1pt] {$\ell_c$};
+            % Labels
+            \node[blue!60, font=\tiny, above] at (3,0.05) {static meniscus};
+            \node[mpurple, font=\tiny, align=left, right=2pt] at (0.27,0.42)
+              {dynamic\\meniscus};
+            \node[gray!60, font=\tiny, rotate=90] at (-0.33,1.5) {plate};
+            \node[align=center, below] at (2.5,-2.4) {(a) homogeneous plate};
+          \end{scope}
+
+          %=== Panel (b): patchy plate, three Lambda regimes ===
+          \begin{scope}[xshift=7.4cm]
+
+            % --- Lambda << 1: many tiny patches, smooth meniscus ---
+            \begin{scope}[yshift=2.6cm]
+              \fill[cyan!10] (0,0) rectangle (4.0,0.58);
+              \fill[gray!25] (0,-0.12) rectangle (4.0,0);
+              \foreach \xi in {0.08,0.30,0.52,0.74,0.96,1.18,1.40,1.62,1.84,2.06,2.28,2.50,2.72,2.94,3.16,3.38,3.60,3.82}{
+                \fill[orange!55] (\xi,0) rectangle (\xi+0.14,0.02);
+              }
+              \draw[blue!80, line width=1.4pt]
+                (0,0.40) .. controls (1.5,0.38) and (3.0,0.12) .. (4.0,0);
+              \node[left, align=right] at (-0.06,0.28) {$\Lambda \!\ll\! 1$};
+              \node[right, gray!55, font=\tiny, align=left] at (4.08,0.28)
+                {uniform film,\\shifted prefactor};
+            \end{scope}
+
+            % --- Lambda ~ 1: patches comparable to dynamic meniscus ---
+            \begin{scope}[yshift=0.6cm]
+              \fill[cyan!10] (0,0) rectangle (4.0,0.58);
+              \fill[gray!25] (0,-0.12) rectangle (4.0,0);
+              \foreach \xi in {0.15,1.45,2.75}{
+                \fill[orange!55] (\xi,0) rectangle (\xi+0.88,0.02);
+              }
+              \draw[blue!80, line width=1.4pt]
+                (0,0.44)
+                .. controls (0.65,0.42) and (0.95,0.27) .. (1.35,0.16)
+                .. controls (1.68,0.12) and (2.12,0.24) .. (2.52,0.12)
+                .. controls (2.92,0.07) and (3.50,0.06) .. (4.0,0);
+              \node[left, align=right] at (-0.06,0.28) {$\Lambda \!\sim\! 1$};
+              \node[right, gray!55, font=\tiny, align=left] at (4.08,0.28)
+                {resonant,\\modulated film};
+            \end{scope}
+
+            % --- Lambda >> 1: large patch, contact line pinned ---
+            \begin{scope}[yshift=-1.4cm]
+              \fill[cyan!10] (0,0) rectangle (4.0,0.58);
+              \fill[gray!25] (0,-0.12) rectangle (4.0,0);
+              \fill[orange!55] (0.25,0) rectangle (3.75,0.02);
+              % dry zone above patch (plate emerges dry to the right of pinning point)
+              \fill[gray!18,opacity=0.8] (0.25,0.02) rectangle (4.0,0.58);
+              \draw[gray!50, densely dashed, thin] (0.25,0.02) -- (0.25,0.58);
+              % meniscus pinned at patch left edge
+              \draw[blue!80, line width=1.4pt]
+                (0,0.58) .. controls (0.08,0.44) and (0.18,0.14) .. (0.25,0.02);
+              \fill[red!65] (0.25,0.02) circle (2.0pt);
+              \node[above, font=\tiny, red!65] at (0.25,0.03) {pinned};
+              \node[left, align=right] at (-0.06,0.28) {$\Lambda \!\gg\! 1$};
+              \node[right, gray!55, font=\tiny, align=left] at (4.08,0.28)
+                {patch-by-patch,\\sub-critical};
+            \end{scope}
+
+            % Panel label
+            \node[align=center, below] at (2.0,-2.0) {(b) patchy plate};
+
+            % Legend
+            \fill[orange!55] (0.0,-2.55) rectangle (0.55,-2.40);
+            \draw[gray!55, thin] (0.0,-2.55) rectangle (0.55,-2.40);
+            \node[right, font=\small] at (0.62,-2.47)
+              {wettable patch (size $\ell_p$, fraction $\phi$)};
+
+          \end{scope}
+
+        \end{tikzpicture}
         \caption{Clean-plate Landau--Levich vs the coated-plate hook. (a)~Homogeneous plate: the dynamic meniscus of length $\ell_m \sim \ell_c \, \mathrm{Ca}^{1/3}$ matches the static meniscus to a flat film of thickness $h \sim \ell_c \, \mathrm{Ca}^{2/3}$; on partially wetting substrates, $\mathrm{Ca} < \mathrm{Ca}^\star$ leaves the plate dry. (b)~Patchy plate: the contact line pins on patches of size $\ell_p$ and areal fraction $\phi$. The dimensionless group $\Lambda = \ell_p / \ell_m$ decides whether the dynamic meniscus averages over many patches ($\Lambda \ll 1$), resolves individual patches ($\Lambda \sim 1$), or advances fully patch-by-patch ($\Lambda \gg 1$).}
         \label{fig:mechanism}
     \end{center}
@@ -117,15 +214,85 @@ The deliverable is a predictive rule. Given a target entrained-film thickness at
 
 \begin{figure}[H]
     \begin{center}
-        % TBD: (Ca, Lambda) regime diagram sketch with experimental + simulation markers
-        % Suggested: log-log (Ca, Lambda) plane. Three regions:
-        %   (i)  Lambda << 1: homogenised Landau--Levich with shifted prefactor.
-        %   (ii) Lambda ~ O(1): resonant / crossover regime.
-        %   (iii) Lambda >> 1: patch-by-patch entrainment; sub-critical window
-        %         below the clean-plate Ca*.
-        % Overlay: Basilisk DNS markers (colour-coded by phi) + LB experimental
-        % points from the Bromley rig. Dashed line Ca* for clean plate.
-        \fbox{\parbox{0.9\textwidth}{\centering \vspace{2cm} Figure~2 placeholder: \\ $(\mathrm{Ca}, \Lambda)$ regime diagram with LB experiment + Basilisk DNS markers \vspace{2cm}}}
+        \begin{tikzpicture}
+        \begin{loglogaxis}[
+          width=11cm, height=8.2cm,
+          xlabel={Capillary number $\mathrm{Ca} = \eta U / \gamma$},
+          ylabel={$\Lambda = \ell_p / (\ell_c\,\mathrm{Ca}^{1/3})$},
+          xmin=1e-7, xmax=1e-2,
+          ymin=1e-2, ymax=1e2,
+          xtick={1e-7,1e-6,1e-5,1e-4,1e-3,1e-2},
+          ytick={1e-2,1e-1,1e0,1e1,1e2},
+          grid=both,
+          grid style={gray!30, very thin},
+          minor grid style={gray!15, very thin},
+          axis line style={semithick},
+          label style={font=\small},
+          tick label style={font=\small},
+          clip=false,
+        ]
+          % Region I: Ca < Ca*, Lambda < 1 -- dry (clean plate below threshold,
+          %           patches too small to pin contact line coherently)
+          \addplot[fill=gray!22, draw=none, opacity=0.9] coordinates {
+            (1e-7,1e-2) (1e-4,1e-2) (1e-4,1) (1e-7,1) (1e-7,1e-2)
+          };
+
+          % Region II: Ca < Ca*, Lambda > 1 -- sub-critical film entrainment
+          %            (patches enable film below clean-plate threshold)
+          \addplot[fill=orange!22, draw=none, opacity=0.9] coordinates {
+            (1e-7,1) (1e-4,1) (1e-4,1e2) (1e-7,1e2) (1e-7,1)
+          };
+
+          % Region III: Ca > Ca*, Lambda < 1 -- homogenised Landau--Levich
+          %             (Cassie-averaged substrate, shifted prefactor)
+          \addplot[fill=cyan!18, draw=none, opacity=0.9] coordinates {
+            (1e-4,1e-2) (1e-2,1e-2) (1e-2,1) (1e-4,1) (1e-4,1e-2)
+          };
+
+          % Region IV: Ca > Ca*, Lambda > 1 -- patch-modulated film,
+          %            selective deposition onto wettable regions
+          \addplot[fill=green!15, draw=none, opacity=0.9] coordinates {
+            (1e-4,1) (1e-2,1) (1e-2,1e2) (1e-4,1e2) (1e-4,1)
+          };
+
+          % Ca* vertical line (clean-plate entrainment threshold)
+          \addplot[gray!60, thick, densely dashed, forget plot] coordinates {
+            (1e-4,1e-2) (1e-4,1e2)
+          };
+
+          % Lambda = 1 horizontal line (dynamic-meniscus / patch-size crossover)
+          \addplot[mpurple, thick, densely dashed, forget plot] coordinates {
+            (1e-7,1) (1e-2,1)
+          };
+
+          % Region labels
+          \node[gray!60, align=center, font=\footnotesize] at (axis cs:3e-6,1.5e-1)
+            {\textit{dry}\\no film};
+
+          \node[orange!75!black, align=center, font=\footnotesize] at (axis cs:3e-6,1e1)
+            {\textit{sub-critical}\\patch-enabled film\\(open question)};
+
+          \node[cyan!65!black, align=center, font=\footnotesize] at (axis cs:1e-3,1.5e-1)
+            {\textit{homogenised}\\$h \!\sim\! \ell_c\,\mathrm{Ca}^{2/3}$};
+
+          \node[green!55!black, align=center, font=\footnotesize] at (axis cs:1e-3,1e1)
+            {\textit{patch-modulated}\\selective deposition};
+
+          % Axis annotations
+          \node[gray!60, rotate=90, font=\footnotesize, above=2pt] at (axis cs:1.4e-4,3e0)
+            {$\mathrm{Ca}^\star$ (clean plate)};
+
+          \node[mpurple, font=\footnotesize, above right=1pt] at (axis cs:1e-7,1.1)
+            {$\Lambda = 1$};
+
+          % LB deposition range annotation
+          \draw[gray!50, thin, decorate, decoration={brace, amplitude=4pt}]
+            (axis cs:1e-7,1.5e-2) -- (axis cs:1e-4,1.5e-2)
+            node[midway, below=5pt, gray!60, font=\tiny, align=center]
+            {Langmuir--Blodgett range\\($\mathrm{Ca} \sim 10^{-7}$--$10^{-4}$)};
+
+        \end{loglogaxis}
+        \end{tikzpicture}
         \caption{Target regime diagram on the $(\mathrm{Ca}, \Lambda)$ plane, with the clean-plate Landau--Levich threshold $\mathrm{Ca}^\star$ as the $\Lambda \to 0$ reference. Three regimes: homogenised ($\Lambda \ll 1$), resonant ($\Lambda \sim 1$), and isolated-patch entrainment ($\Lambda \gg 1$). Markers from Langmuir--Blodgett experiment (Bromley lab) and Basilisk~C axisymmetric simulation (CoMPhy Lab).}
         \label{fig:regime-map}
     \end{center}
